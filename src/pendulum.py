@@ -23,7 +23,7 @@ class Pendulum():
 
 
 	def simulate(self, time):
-		y_start = [np.pi/2, 0.0]
+		y_start = [np.pi/2, 0.01]
 		b = 10.0
 		c = 9.81
 		solutions = odeint(self.physics, y_start, time, args=(b, c))
