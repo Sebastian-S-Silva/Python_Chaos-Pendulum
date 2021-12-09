@@ -53,7 +53,7 @@ class Pendulum():
 			for event in pg.event.get():
 				if event.type == pg.QUIT:
 					pg.quit()
-
+					exit()
 			self.screen.fill((1, 1, 1))
 
 			pg.draw.circle(self.screen, (255, 255, 255), (400, 150), 25)
