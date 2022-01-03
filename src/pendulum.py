@@ -26,12 +26,11 @@ class Pendulum():
 
 
 	def simulate(self, time):
-		y_start = [np.pi/2, 0.0]
+		y_start = [self.start_angle, 0.0]
 		b = 10.0
 		c = 9.81
-		solutions = odeint(self.physics, y_start, time, args=(b, c))
+		self.solutions = odeint(self.physics, y_start, time, args=(b, c))
 
-		return solutions
 
 	def draw_P(self):
 		pg.init()
@@ -43,10 +42,7 @@ class Pendulum():
 		pg.display.set_icon(icon)
 		clock = pg.time.Clock()
 
-		pend_end_x = 100
-		pend_end_y = 100
-
-		angle = 0
+		moment = 0
 
 		running = True
 		while running:
@@ -62,11 +58,14 @@ class Pendulum():
 
 
 
-			pg.draw.line(self.screen, (0, 100, 0), (400, 150), (pend_end_x*math.cos(angle) + 400, pend_end_y*math.sin(angle) + 150), 6)
+			pg.draw.line(self.screen, (0, 100, 0), (400, 150), ((self.length*math.sin(self.solutions[moment][0]) + 400), (self.length*math.cos(self.solutions[moment][0]) + 150)), 6)
 
-			angle += 0.01
+			if moment < (len(self.solutions)-1):
+				moment += 1
 
 			pg.display.update()
-			clock.tick(120)
+			clock.tick(60)
+
+			
 
 		
